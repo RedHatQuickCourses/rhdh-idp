@@ -10,6 +10,7 @@ spec:
   database:
     enableLocalDb: true
   application:
+    dynamicPluginsConfigMapName: dynamic-plugins-rhdh
     appConfig:
       configMaps:
         - name: app-config-rhdh
@@ -25,5 +26,3 @@ spec:
       enabled: true
       host: rhdh.apps.cluster-<GUID>.dynamic.redhatworkshops.io
       subdomain: apps.cluster-<GUID>.dynamic.redhatworkshops.io
-    dynamicPluginsConfigMapName: dynamic-plugins-rhdh
-
