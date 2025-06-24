@@ -54,3 +54,25 @@ data:
               resolvers:
                 - resolver: emailMatchingUserEntityProfileEmail
                   dangerouslyAllowSignInWithoutUserInCatalog: true
+    integrations:
+      github:
+        - host: github.com
+          token: ${GITHUB_TOKEN}
+    kubernetes:
+      serviceLocatorMethod:
+        type: 'multiTenant'
+      clusterLocatorMethods:
+        - type: config
+          clusters:
+            - name: openshift-cluster
+              url: https://api.cluster-<GUID>.dynamic.redhatworkshops.io:6443
+              authProvider: serviceAccount
+              skipTLSVerify: true
+              serviceAccountToken: ${K8S_SA_TOKEN}
+              customResources:
+                - group: 'route.openshift.io'
+                  apiVersion: 'v1'
+                  plural: 'routes'
+    scaffolder:
+      github:
+        token: ${GITHUB_TOKEN}

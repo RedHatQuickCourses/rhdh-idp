@@ -25,3 +25,4 @@ spec:
       enabled: true
       host: rhdh.apps.cluster-<GUID>.dynamic.redhatworkshops.io
       subdomain: apps.cluster-<GUID>.dynamic.redhatworkshops.io
+    dynamicPluginsConfigMapName: dynamic-plugins-rhdh

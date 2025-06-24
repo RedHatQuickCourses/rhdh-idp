@@ -8,3 +8,4 @@ resources:
   - rhdh/4-Secret.yaml
   - rhdh/5-app-config-rhdh.yaml
   - rhdh/6-backstage.yaml
+  - rhdh/5-dynamic-plugins.yaml
