@@ -1,0 +1,56 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config-rhdh
+  namespace: demo-project
+data:
+  app-config.yaml: |
+    app:
+      title: Red Hat Developer Hub
+      baseUrl: https://rhdh.apps.cluster-<GUID>.dynamic.redhatworkshops.io
+    backend:
+      auth:
+        keys:
+          - secret: ${BACKEND_SECRET}
+      baseUrl: https://rhdh.apps.cluster-<GUID>.dynamic.redhatworkshops.io
+      cors:
+        origin: https://rhdh.apps.cluster-<GUID>.dynamic.redhatworkshops.io
+      reading:
+        allow:
+          - host: raw.githubusercontent.com
+    auth:
+      environment: production
+      session:
+        secret: ${BACKEND_SECRET}
+      providers:
+        oidc:
+          production:
+            metadataUrl: "https://keycloak-rhdh-operator.apps.cluster-<GUID>.dynamic.redhatworkshops.io/realms/rhdh"
+            clientId: rhdh
+            clientSecret: developer-hub-secret
+            callbackUrl: https://rhdh.apps.cluster-<GUID>.dynamic.redhatworkshops.io/api/auth/oidc/handler/frame
+            prompt: login
+            signIn:
+              resolvers:
+                - resolver: emailMatchingUserEntityProfileEmail
+                  dangerouslyAllowSignInWithoutUserInCatalog: true
+      dangerouslyAllowSignInWithoutUserInCatalog: true
+    signInPage: oidc
+    catalog:
+      providers:
+        keycloakOrg:
+          default:
+            baseUrl: "https://keycloak-rhdh-operator.apps.cluster-<GUID>.dynamic.redhatworkshops.io"
+            loginRealm: "rhdh"
+            realm: "rhdh"
+            clientId: rhdh
+            clientSecret: developer-hub-secret
+            schedule:
+              frequency: { minutes: 1 }
+              timeout: { minutes: 1 }
+              initialDelay: { seconds: 15 }
+            signIn:
+              resolvers:
+                - resolver: emailMatchingUserEntityProfileEmail
+                  dangerouslyAllowSignInWithoutUserInCatalog: true

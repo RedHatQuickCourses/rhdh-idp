@@ -1,0 +1,27 @@
+---
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+metadata:
+  name: demo-keycloak-instance
+  namespace: demo-project
+  labels:
+    app: sso
+spec:
+  http:
+    httpEnabled: true
+    httpPort: 8090
+    tlsSecret: my-tls-secret
+  hostname:
+    adminUrl: 'https://keycloak-rhdh-operator.apps.cluster-<GUID>.dynamic.redhatworkshops.io'
+    hostname: keycloak-rhdh-operator.apps.cluster-<GUID>.dynamic.redhatworkshops.io
+  instances: 1
+  db:
+    vendor: postgres
+    host: keycloak-postgres
+    usernameSecret:
+      name: keycloak-db-secret
+      key: username
+    passwordSecret:
+      name: keycloak-db-secret
+      key: password
+...

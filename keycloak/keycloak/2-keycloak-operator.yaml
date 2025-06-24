@@ -1,0 +1,17 @@
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhbk-operator
+  namespace: demo-project
+  labels:
+    operators.coreos.com/rhbk-operator.rhdh-operator: ''
+  annotations:
+    operators.operatorframework.io.display-name: Red Hat build of Keycloak Operator
+spec:
+  channel: stable-v22
+  installPlanApproval: Automatic
+  name: rhbk-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+...

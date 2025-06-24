@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rhdh-operator
+  labels:
+    kubernetes.io/metadata.name: rhdh-operator
+  annotations:
+    openshift.io/display-name: Red Hat Developer Hub Operator
+...
